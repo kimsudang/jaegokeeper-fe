@@ -1,6 +1,5 @@
 // 근로기록부
 export const WORK_STATUS = ["출근", "휴무", "대타", "지각", "결근", "퇴근"] as const;
-
 export type WorkStatus = (typeof WORK_STATUS)[number];
 export interface Work {
     workId: number;
