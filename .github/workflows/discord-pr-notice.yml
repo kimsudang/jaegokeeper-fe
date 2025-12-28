@@ -40,12 +40,10 @@ jobs:
 
             baseTitle="🔄 커밋 추가됨! PR 업데이트"
             color=10181046
-            extra="**유형-** 커밋 추가(synchronize)\n**기준-** 마지막 커밋 메시지"
           else
             sourceText="$pr_title"
             baseTitle="🆕 새 Pull Request!"
             color=3447003
-            extra="**유형-** PR 생성(opened)\n**기준-** PR 제목"
           fi
 
           type=$(echo "$sourceText" | sed -nE 's/^([a-z]+)(\([^)]+\))?:.*/\1/p' | head -n 1)
@@ -91,7 +89,7 @@ jobs:
               "embeds": [
                 {
                   "title": "\($emoji) \($baseTitle)",
-                  "description": "**작성자-** \($actor)\n\($extra)\n**타입-** \($type)\n**파싱 대상-** \($sourceText)\n**PR Title-** \($title)\n🔗 [PR 보러가기](\($url))",
+                  "description": "**작성자-** \($actor)\n\($extra)\n**타입-** \($type)\n**커밋 메시지-** \($sourceText)\n**PR Title-** \($title)\n🔗 [PR 보러가기](\($url))",
                   "color": $color,
                   "timestamp": now | todateiso8601
                 }
