@@ -1,10 +1,10 @@
 "use client";
 
-import { joinSchema, JoinValues } from "@/lib/schemas/auth/signup.schema";
 import { useLayout } from "@/components/layouts/provider/LayoutProvider";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
+import { signupSchema, SignupValues } from "@/lib/schemas/auth/signup.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -17,8 +17,8 @@ export default function JoinPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<JoinValues>({
-    resolver: zodResolver(joinSchema),
+  } = useForm<SignupValues>({
+    resolver: zodResolver(signupSchema),
     shouldFocusError: true,
     defaultValues: {
       signupEmail: "",
@@ -31,7 +31,7 @@ export default function JoinPage() {
     },
   });
 
-  const onSubmit = (values: JoinValues) => {
+  const onSubmit = (values: SignupValues) => {
     console.log("회원가입 제출");
     console.log(values);
   };
@@ -77,9 +77,9 @@ export default function JoinPage() {
 
           {/* 상호 */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm font-medium">매장명</label>
+            <label className="text-sm font-medium">상호</label>
             <div className="flex flex-col gap-1">
-              <Input type="text" {...register("signupStoreName")} placeholder="피자스쿨 OO점" />
+              <Input type="text" {...register("signupStoreName")} placeholder="OO치킨 OO점" />
               {errors.signupStoreName && <p className="text-sm text-destructive">{errors.signupStoreName.message}</p>}
             </div>
           </div>

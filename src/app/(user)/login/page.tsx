@@ -40,7 +40,7 @@ export default function Login() {
   return (
     <div className="flex items-center justify-center p-6 pt-20">
       <div className="flex flex-col items-center w-full max-w-sm gap-4">
-        <h1 className="mb-4 text-2xl font-bold">로그인</h1>
+        <div className="mb-4 text-2xl font-bold">로그인</div>
         <Image src="/logo-temp.jpeg" alt="재고키퍼 로고" width={180} height={180} priority />
 
         <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
@@ -60,8 +60,8 @@ export default function Login() {
 
           {/* 상호 */}
           <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">상호명</label>
-            <Input type="text" {...register("loginStoreName")} placeholder="피자스쿨 OO점" />
+            <label className="text-sm font-medium">상호</label>
+            <Input type="text" {...register("loginStoreName")} placeholder="OO치킨 OO점" />
             {errors.loginStoreName && <p className="text-sm text-destructive">{errors.loginStoreName.message}</p>}
           </div>
           <Button type="submit" size="lg" className="w-full">
@@ -75,15 +75,15 @@ export default function Login() {
 
         <Separator />
 
-        <Button type="submit" size="lg" disabled className="w-full">
+        <Button type="button" size="lg" disabled className="w-full">
           네이버
         </Button>
 
-        <Button type="submit" size="lg" disabled className="w-full">
+        <Button type="button" size="lg" disabled className="w-full">
           구글
         </Button>
 
-        <Button type="submit" size="lg" disabled className="w-full">
+        <Button type="button" size="lg" disabled className="w-full">
           카카오
         </Button>
       </div>
