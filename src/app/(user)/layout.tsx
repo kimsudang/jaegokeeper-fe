@@ -1,5 +1,6 @@
 import GuestFooter from "@/components/layouts/guest/GuestFooter";
 import GuestHeader from "@/components/layouts/guest/GuestHeader";
+import { Toaster } from "@/components/ui/sonner";
 
 export default function AuthpageLayout({
   children,
@@ -9,7 +10,10 @@ export default function AuthpageLayout({
   return (
     <div className="flex flex-col min-h-screen">
       <GuestHeader />
-      <main className="flex-1">{children}</main>
+      <div className="flex-1">
+        {children}
+        <Toaster position="bottom-right" />
+      </div>
       <GuestFooter />
     </div>
   );

@@ -8,8 +8,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { FieldErrors, useForm } from "react-hook-form";
 import { UserFormField } from "../_components/UserFormField";
+import { toast } from "sonner";
 
 export default function JoinPage() {
   const { setHeaderTitle } = useLayout();
@@ -34,9 +35,30 @@ export default function JoinPage() {
   });
 
   const onSubmit = (values: SignupValues) => {
-    console.log("회원가입 제출");
     console.log(values);
+    toast.success("회원가입 성공");
     router.push("/login");
+  };
+
+  const onError = (errors: FieldErrors<SignupValues>) => {
+    const errorMessages = Object.values(errors)
+      .map((error) => error?.message)
+      .filter(Boolean);
+
+    if (errorMessages.length > 0) {
+      toast.error("입력 정보를 확인해주세요", {
+        description: (
+          <ul className="mt-2 space-y-1">
+            {errorMessages.map((message, index) => (
+              <li key={index} className="text-sm">
+                • {message}
+              </li>
+            ))}
+          </ul>
+        ),
+        duration: 5000,
+      });
+    }
   };
 
   useEffect(() => {
@@ -44,11 +66,11 @@ export default function JoinPage() {
   }, [setHeaderTitle]);
 
   return (
-    <div className="flex items-center justify-center p-6 pt-16">
-      <div className="flex flex-col items-center w-full max-w-sm gap-4 p-8">
+    <div className="flex items-center justify-center p-6 pt-14">
+      <div className="flex flex-col items-center w-full max-w-sm gap-4">
         <div className="text-2xl font-bold">회원가입</div>
 
-        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
+        <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit(onSubmit, onError)}>
           <UserFormField label="이메일" type="email" register={register("signupEmail")} placeholder="email@mail.com" error={errors.signupEmail?.message} required />
           <UserFormField label="이름" type="text" register={register("signupUserName")} placeholder="홍길동" error={errors.signupUserName?.message} required />
           <UserFormField label="개인번호" type="tel" register={register("signupUserPhone")} placeholder="010-0000-0000" error={errors.signupUserPhone?.message} required />
