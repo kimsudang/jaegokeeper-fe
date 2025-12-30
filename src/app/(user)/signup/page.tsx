@@ -44,19 +44,19 @@ export default function JoinPage() {
   }, [setHeaderTitle]);
 
   return (
-    <div className="flex items-center justify-center p-6 pt-20">
+    <div className="flex items-center justify-center p-6 pt-16">
       <div className="flex flex-col items-center w-full max-w-sm gap-4 p-8">
         <div className="text-2xl font-bold">회원가입</div>
 
         <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <UserFormField label="이메일" type="email" register={register("signupEmail")} placeholder="email@mail.com" error={errors.signupEmail?.message} />
-          <UserFormField label="이름" type="text" register={register("signupUserName")} placeholder="홍길동" error={errors.signupUserName?.message} />
-          <UserFormField label="개인번호" type="tel" register={register("signupUserPhone")} placeholder="010-0000-0000" error={errors.signupUserPhone?.message} />
+          <UserFormField label="이메일" type="email" register={register("signupEmail")} placeholder="email@mail.com" error={errors.signupEmail?.message} required />
+          <UserFormField label="이름" type="text" register={register("signupUserName")} placeholder="홍길동" error={errors.signupUserName?.message} required />
+          <UserFormField label="개인번호" type="tel" register={register("signupUserPhone")} placeholder="010-0000-0000" error={errors.signupUserPhone?.message} required />
 
           <Separator />
 
-          <UserFormField label="상호" type="text" register={register("signupStoreName")} placeholder="OO치킨 OO점" error={errors.signupStoreName?.message} />
-          <UserFormField label="매장 연락처" type="tel" register={register("signupStoreCall")} placeholder="02-0000-0000" error={errors.signupStoreCall?.message} />
+          <UserFormField label="상호" type="text" register={register("signupStoreName")} placeholder="OO치킨 OO점" error={errors.signupStoreName?.message} required />
+          <UserFormField label="매장 연락처" type="tel" register={register("signupStoreCall")} placeholder="02-0000-0000" error={errors.signupStoreCall?.message} required />
           <UserFormField label="주소" type="text" register={register("signupStoreAdd")} placeholder="서울특별시 강서구00길 00" error={errors.signupStoreAdd?.message} />
           <UserFormField label="상세 주소" type="text" register={register("signupStoreDetailAdd")} placeholder="0층 0호" />
 

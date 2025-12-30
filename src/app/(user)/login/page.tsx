@@ -41,8 +41,8 @@ export default function Login() {
   }, [setHeaderTitle]);
 
   return (
-    <div className="flex items-center justify-center p-6 pt-20">
-      <div className="flex flex-col items-center w-full max-w-sm gap-4">
+    <div className="flex items-center justify-center p-6 pt-16">
+      <div className="flex flex-col items-center w-full max-w-sm gap-4 p-8">
         <div className="mb-4 text-2xl font-bold">로그인</div>
         <Image src="/logo-temp.jpeg" alt="재고키퍼 로고" width={180} height={180} priority />
 

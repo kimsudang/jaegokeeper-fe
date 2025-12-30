@@ -12,11 +12,8 @@ export const signupSchema = z.object({
   signupStoreCall: z
     .string()
     .min(1, "가게 전화번호를 작성해주세요.")
-    .regex(
-      /^(02-\d{3,4}-\d{4}|0[3-9]\d-\d{3,4}-\d{4}|0(50|70)-\d{4}-\d{4})$/,
-      "가게 전화번호 형식이 올바르지 않습니다."
-    ),
-  signupStoreAdd: z.string().min(1, "가게 주소를 작성해주세요."),
+    .regex(/^(02-\d{3,4}-\d{4}|0[3-9]\d-\d{3,4}-\d{4}|0(50|70)-\d{4}-\d{4})$/, "가게 전화번호 형식이 올바르지 않습니다."),
+  signupStoreAdd: z.string(),
   signupStoreDetailAdd: z.string(),
 });
 
