@@ -2,17 +2,19 @@
 
 import { useLayout } from "@/components/layouts/provider/LayoutProvider";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { loginSchema, LoginValues } from "@/lib/schemas/auth/login.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { UserFormField } from "../_components/UserFormField";
 
 export default function Login() {
   const { setHeaderTitle } = useLayout();
+  const router = useRouter();
 
   const {
     register,
@@ -31,6 +33,7 @@ export default function Login() {
   const onSubmit = (values: LoginValues) => {
     console.log("로그인 제출");
     console.log(values);
+    router.push("/");
   };
 
   useEffect(() => {
@@ -44,32 +47,16 @@ export default function Login() {
         <Image src="/logo-temp.jpeg" alt="재고키퍼 로고" width={180} height={180} priority />
 
         <form className="flex flex-col w-full gap-4" onSubmit={handleSubmit(onSubmit)}>
-          {/* 메일 */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">이메일</label>
-            <Input type="email" {...register("loginEmail")} placeholder="email@mail.com" />
-            {errors.loginEmail && <p className="text-sm text-destructive">{errors.loginEmail.message}</p>}
-          </div>
+          <UserFormField label="이메일" type="email" register={register("loginEmail")} placeholder="email@mail.com" error={errors.loginEmail?.message} />
+          <UserFormField label="사용자 이름" type="text" register={register("loginUserName")} placeholder="홍길동" error={errors.loginUserName?.message} />
+          <UserFormField label="상호" type="text" register={register("loginStoreName")} placeholder="OO치킨 OO점" error={errors.loginStoreName?.message} />
 
-          {/* 이름 */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">사용자 이름</label>
-            <Input type="text" {...register("loginUserName")} placeholder="홍길동" />
-            {errors.loginUserName && <p className="text-sm text-destructive">{errors.loginUserName.message}</p>}
-          </div>
-
-          {/* 상호 */}
-          <div className="flex flex-col gap-2">
-            <label className="text-sm font-medium">상호</label>
-            <Input type="text" {...register("loginStoreName")} placeholder="OO치킨 OO점" />
-            {errors.loginStoreName && <p className="text-sm text-destructive">{errors.loginStoreName.message}</p>}
-          </div>
           <Button type="submit" size="lg" className="w-full">
             로그인
           </Button>
         </form>
 
-        <Link href="/signup" className="text-sm text-muted-foreground">
+        <Link href="/signup" className="text-sm text-muted-foreground hover:underline">
           회원가입
         </Link>
 
